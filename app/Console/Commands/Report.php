@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Exports\ReportExport;
 use Illuminate\Console\Command;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Report extends Command
 {
@@ -12,6 +14,10 @@ class Report extends Command
 
     public function handle()
     {
-        //
+        $startdate = $this->argument('startdate');
+        $enddate = $this->argument('enddate');
+
+        Excel::store(new ReportExport($startdate, $enddate), 'report.xlsx');
+        return Command::SUCCESS;
     }
 }
