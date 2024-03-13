@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Throwable;
 
 class MlaExample implements ShouldQueue
 {
@@ -27,6 +28,17 @@ class MlaExample implements ShouldQueue
     public function handle(): void
     {
         sleep(3);
+        // abort(500);
         logger("Stanley Wodson" . now());
+    }
+
+    public function backoff()
+    {
+        return 5;
+    }
+
+    public function failed(Throwable $exception)
+    {
+        logger("Failed");
     }
 }
