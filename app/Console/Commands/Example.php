@@ -3,7 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Jobs\MlaExample;
+use App\Models\User;
+use App\Notifications\NotificationExample;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 
 class Example extends Command
 {
@@ -21,13 +24,25 @@ class Example extends Command
      */
     protected $description = 'Command description';
 
-    /**
-     * Execute the console command.
-     */
+    // Queue
+    // public function handle()
+    // {
+    //     for($i =0; $i < 10; $i++){
+    //         dispatch(new MlaExample());
+    //     }
+    // }
+
+    //Notify
     public function handle()
     {
-        for($i =0; $i < 10; $i++){
-            dispatch(new MlaExample());
-        }
+        //One and help
+        // $user = User::first();
+        // $user->notify(new NotificationExample());
+
+        //Many and facades
+        $users = User::all();
+        Notification::send($users, new NotificationExample());
+
+
     }
 }
