@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Exports\ReportExport;
 use App\Jobs\GenerateReportJob;
 use Illuminate\Console\Command;
 
