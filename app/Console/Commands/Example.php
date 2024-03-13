@@ -26,6 +26,8 @@ class Example extends Command
      */
     public function handle()
     {
-        dispatch(new MlaExample());
+        for($i =0; $i < 10; $i++){
+            dispatch(new MlaExample());
+        }
     }
 }

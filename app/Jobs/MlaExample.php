@@ -26,7 +26,7 @@ class MlaExample implements ShouldQueue
      */
     public function handle(): void
     {
-        sleep(10);
+        sleep(3);
         logger("Stanley Wodson" . now());
     }
 }
