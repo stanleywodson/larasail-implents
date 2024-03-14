@@ -1,27 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api', function () {
-    $result = Http::get('https://jsonplaceholder.typicode.com/posts');
-    $test_collection = collect($result->json());
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-
-    // dd($test_collection->map(function($item) {
-    //     return  ucfirst($item['title']);
-    // }));
-
-    $test2 = [];
-    foreach ($test_collection as $post) {
-        array_push($test2, $post);
-    }
-
-    dd(array_filter($test2, function($item) {
-        return $item['id'] == 1;
-    }));
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__.'/auth.php';
