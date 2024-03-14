@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\NotificationEvent;
 use App\Jobs\MlaExample;
 use App\Models\User;
 use App\Notifications\NotificationExample;
@@ -40,9 +41,11 @@ class Example extends Command
         // $user->notify(new NotificationExample());
 
         //Many and facades
-        $users = User::all();
-        Notification::send($users, new NotificationExample());
+        // $users = User::all();
+        // Notification::send($users, new NotificationExample());
 
+        //trigger event Broadcastiong
+        event(new NotificationEvent());
 
     }
 }
