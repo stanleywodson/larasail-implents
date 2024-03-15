@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Events\NotificationEvent;
+use App\Events\PrivateEvent;
 use App\Jobs\MlaExample;
 use App\Models\User;
 use App\Notifications\NotificationExample;
@@ -45,7 +46,8 @@ class Example extends Command
         // Notification::send($users, new NotificationExample());
 
         //trigger event Broadcastiong
-        event(new NotificationEvent());
+        // event(new NotificationEvent());
+        event(new PrivateEvent(User::first()));
 
     }
 }

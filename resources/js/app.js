@@ -12,3 +12,8 @@ window.Echo.channel('logged').listen('NotificationEvent',(e) => {
     alert('Stanley Wodson')
   })
 
+window.Echo.private('user.1').listen('PrivateEvent',(e) => {
+    alert('Canal privado')
+
+  })
+
